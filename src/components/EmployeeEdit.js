@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Communications from 'react-native-communications';
 import EmployeeForm from './EmployeeForm';
-import { employeeUpdate, employeeSave, employeeClear } from '../actions';
+import { employeeUpdate, employeeSave, employeeClear, employeeDelete } from '../actions';
 import { Card, CardSection, Button, Confirm } from './common';
 
 class EmployeeEdit extends Component {
@@ -32,7 +32,9 @@ class EmployeeEdit extends Component {
   }
 
   onAccept() {
-    
+    const { uid } = this.props.employee;
+
+    this.props.employeeDelete({ uid });
   }
 
   onDecline() {
@@ -81,5 +83,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  employeeUpdate, employeeSave, employeeClear
+  employeeUpdate, employeeSave, employeeClear, employeeDelete
 })(EmployeeEdit);
